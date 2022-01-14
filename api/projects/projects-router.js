@@ -48,3 +48,14 @@ router.put('/:id', checkProjectId, validateProject, async (req, res, next) => {
 		next(err);
 	}
 });
+
+//delete
+router.delete('/:id', checkProjectId, (req, res, next) => {
+	Projects.remove(req.params.id)
+		.then(() => {
+			res.status(200).json({ message: 'The Project has been nuked💣' });
+		})
+		.catch((error) => {
+			next(error);
+		});
+});
