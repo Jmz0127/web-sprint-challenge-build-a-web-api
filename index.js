@@ -19,8 +19,8 @@ require('dotenv').config();
 const server = require('./api/server.js');
 
 //Bring the port number from the process.env variable, falling back to 9000 if process.env.PORT is undefined !!!
-const port = process.env.PORT || 9000;
+const PORT = process.env.PORT || 9000;
 
-server.listen(port, () => {
-	console.log(`listening on port`, port);
+server.listen(PORT, () => {
+	console.log(`listening on port`, PORT);
 });
