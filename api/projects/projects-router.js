@@ -67,3 +67,5 @@ router.get('/:id/actions', checkProjectId, (req, res, next) => {
 		})
 		.catch(next);
 });
+
+module.exports = router;

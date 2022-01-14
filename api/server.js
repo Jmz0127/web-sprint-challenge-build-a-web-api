@@ -1,18 +1,17 @@
 const express = require('express');
+const server = express();
 
 //set up router URI shortcuts
 
-// const actionRouter = require('./actions/actions-router');
-const projectRouter = require('./projects/projects-router');
+const actionRouter = require('./actions/actions-router.js');
+const projectRouter = require('./projects/projects-router.js');
 
-const server = express();
 
 // Configure your server here
 
 //parse JSON in request bodies
 server.use(express.json());
-
-// server.use('/api/actions', actionsRouter)
+server.use('/api/actions', actionRouter);
 server.use('/api/projects', projectRouter);
 
 //base level response of server
