@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const Actions = require('./actions-model');
-const {checkActionId} = require('./actions-middlware')
+const {checkActionId, validateAction} = require('./actions-middlware')
 
 
 router.get('/', async (req, res, next) => {
@@ -24,6 +24,17 @@ router.get('/:id', checkActionId, async (req, res, next) => {
 	} catch (err) {
 		next(err);
 	}
+});
+
+//post
+router.post('/',  validateAction, (req, res, next) => {
+	Actions.insert(req.body)
+		.then((actions) => {
+			res.status(201).json(actions);
+		})
+		.catch((err) => {
+			next(err);
+		});
 });
 
 module.exports = router;
