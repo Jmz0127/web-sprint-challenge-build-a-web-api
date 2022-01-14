@@ -59,3 +59,11 @@ router.delete('/:id', checkProjectId, (req, res, next) => {
 			next(error);
 		});
 });
+
+router.get('/:id/actions', checkProjectId, (req, res, next) => {
+	Projects.getProjectActions(req.params.id) // just to demo that we tacked the hub to the req
+		.then((messages) => {
+			res.status(200).json(messages);
+		})
+		.catch(next);
+});
