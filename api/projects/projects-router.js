@@ -37,3 +37,14 @@ router.post('/', validateProject, (req, res, next) => {
 			next(err);
 		});
 });
+
+//put
+router.put('/:id', checkProjectId, validateProject, async (req, res, next) => {
+	//only works with async, research as to why
+	try {
+		const updated = await Projects.update(req.params.id, req.body);
+		res.status(200).json(updated);
+	} catch (err) {
+		next(err);
+	}
+});
