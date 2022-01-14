@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const Projects = require('./projects-model');
-const {checkProjectId} = require('./projects-middleware') 
+const { checkProjectId, validateProject } = require('./projects-middleware');
 
 router.get('/', async (req, res, next) => {
 	// return array of all projects
@@ -26,3 +26,14 @@ router.get('/:id', checkProjectId, async (req, res, next) => {
 });
 
 module.exports = router;
+
+//post
+router.post('/', validateProject, (req, res, next) => {
+	Projects.insert(req.body)
+		.then((projects) => {
+			res.status(201).json(projects);
+		})
+		.catch((err) => {
+			next(err);
+		});
+});

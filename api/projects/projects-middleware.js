@@ -5,7 +5,6 @@ async function checkProjectId(req, res, next) {
     try {
       const possibleProjectId = await Projects.get(req.params.id)
       if (possibleProjectId) {
-        // we already have the hub
         req.project = possibleProjectId
         next()
       } else {
@@ -17,10 +16,20 @@ async function checkProjectId(req, res, next) {
     }
   }
 
-
+  function validateProject(req, res, next) {
+    // if the client doest not supply a name for the new hub
+    // we want to respond with a 422 unprocessable entity
+    // otherwise proceed to next middleware
+    if (!req.body.name || !req.body.description) {
+      next({ status: 400, message: "Please provide a name and description" })
+    } else {
+      next()
+    }
+  }
 
 
 
   module.exports = {
     checkProjectId,
+    validateProject
   }
