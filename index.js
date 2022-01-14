@@ -12,3 +12,15 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Pull your server into this file and start it!
 */
+
+// to inject the config var inside of the .env file
+require('dotenv').config();
+
+const server = require('./api/server.js');
+
+//Bring the port number from the process.env variable, falling back to 9000 if process.env.PORT is undefined !!!
+const port = process.env.PORT || 9000;
+
+server.listen(port, () => {
+	console.log(`listening on port`, port);
+});
