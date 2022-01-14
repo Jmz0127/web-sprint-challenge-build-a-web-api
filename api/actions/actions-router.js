@@ -3,18 +3,16 @@ const express = require('express');
 const router = express.Router();
 
 const Actions = require('./actions-model');
-const {checkActionId, validateAction} = require('./actions-middlware')
-
+const { checkActionId, validateAction } = require('./actions-middlware');
 
 router.get('/', async (req, res, next) => {
 	// return array of all actions
-    Actions.get()
-    .then(actions => {
-        res.status(200).json(actions)
-    })
-    .catch(next)
+	Actions.get()
+		.then((actions) => {
+			res.status(200).json(actions);
+		})
+		.catch(next);
 });
-
 
 router.get('/:id', checkActionId, async (req, res, next) => {
 	try {
@@ -27,7 +25,7 @@ router.get('/:id', checkActionId, async (req, res, next) => {
 });
 
 //post
-router.post('/',  validateAction, (req, res, next) => {
+router.post('/', validateAction, (req, res, next) => {
 	Actions.insert(req.body)
 		.then((actions) => {
 			res.status(201).json(actions);
@@ -37,10 +35,15 @@ router.post('/',  validateAction, (req, res, next) => {
 		});
 });
 
-
-
-
-
+//put
+router.put('/:id', checkActionId, validateAction, async (req, res, next) => {
+	try {
+		const updated = await Actions.update(req.params.id, req.body);
+		res.status(200).json(updated);
+	} catch (err) {
+		next(err);
+	}
+});
 
 //delete
 router.delete('/:id', checkActionId, (req, res, next) => {
