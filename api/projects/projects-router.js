@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const Projects = require('./projects-model');
-// const {} = require('./projects-middleware') open this up once middleware is added
+const {checkProjectId} = require('./projects-middleware') 
 
 router.get('/', async (req, res, next) => {
 	// return array of all projects
@@ -15,8 +15,7 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', checkProjectId, async (req, res, next) => {
 	try {
 		const projects = await Projects.get(req.params.id);
 		console.log('whoa it worked!', projects);
