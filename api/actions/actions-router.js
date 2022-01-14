@@ -37,4 +37,20 @@ router.post('/',  validateAction, (req, res, next) => {
 		});
 });
 
+
+
+
+
+
+//delete
+router.delete('/:id', checkActionId, (req, res, next) => {
+	Actions.remove(req.params.id)
+		.then(() => {
+			res.status(200).json({ message: 'The Action has been nuked💣' });
+		})
+		.catch((error) => {
+			next(error);
+		});
+});
+
 module.exports = router;
