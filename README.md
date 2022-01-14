@@ -92,22 +92,22 @@ The description of the structure and extra information about each _resource_ sto
 
 #### Projects
 
-| Field       | Data Type | Metadata                                                                    |
-| ----------- | --------- | --------------------------------------------------------------------------- |
-| id          | number    | do not provide it when creating projects, the database will generate it     |
-| name        | string    | required                                                                    |
-| description | string    | required                                                                    |
-| completed   | boolean   | not required, defaults to false when creating projects                      |
+| Field       | Data Type | Metadata                                                                |
+| ----------- | --------- | ----------------------------------------------------------------------- |
+| id          | number    | do not provide it when creating projects, the database will generate it |
+| name        | string    | required                                                                |
+| description | string    | required                                                                |
+| completed   | boolean   | not required, defaults to false when creating projects                  |
 
 #### Actions
 
-| Field       | Data Type | Metadata                                                                                         |
-| ----------- | --------- | ------------------------------------------------------------------------------------------------ |
-| id          | number    | do not provide it when creating actions, the database will generate it                           |
-| project_id  | number    | required, must be the id of an existing project                                                  |
-| description | string    | required, up to 128 characters long                                                              |
-| notes       | string    | required, no size limit. Used to record additional notes or requirements to complete the action  |
-| completed   | boolean   | not required, defaults to false when creating actions                                            |
+| Field       | Data Type | Metadata                                                                                        |
+| ----------- | --------- | ----------------------------------------------------------------------------------------------- |
+| id          | number    | do not provide it when creating actions, the database will generate it                          |
+| project_id  | number    | required, must be the id of an existing project                                                 |
+| description | string    | required, up to 128 characters long                                                             |
+| notes       | string    | required, no size limit. Used to record additional notes or requirements to complete the action |
+| completed   | boolean   | not required, defaults to false when creating actions                                           |
 
 ### Database Persistence Helpers
 
@@ -147,7 +147,26 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware.
-1. The basic principles of the REST architectural style.
-1. Understand and explain the use of Express Routers.
-1. Describe tooling used to manually test the correctness of an API.
+
+Node.js is a runtime environment (not a programming language or a framework for that matter) that allows for memory efficient programming through asynchronous requests. There is no waiting compared to other file handlers. One of the more common things Node.js is used for is accessing ports on a server, after node is initiated. Another use is CRUD actions on a database.
+
+Express.js is a framework that consists of a bunch of middleware function calls that is essentially sandwiched between the request and response cycle of a webpage. It is composed of a request or req, a response or res, and next which queues up the next middleware function. The features are paramount and quite versatile, allowing a developer to chain together functions during a request and response of APIs for example. Express can also be used to log and authenticate data.
+
+2. Understand and explain the use of Middleware.
+
+Middleware is a pretty broad term but can be summarized as an intermediary, or glue, between two or more applications so they can communicate between each other. This middleware communication can be in the form of translating data between different data types that each application holds, API security through authentication, etc.
+
+3. The basic principles of the REST architectural style.
+
+1 a REST API's URI should end with a noun
+2 a REST HTTP verbs should be used to describe the action that will be taking place - GET, PUT, POST, DELETE, UPDATE, PATCH
+3 it should be clear to the developer when looking at an endpoint on what needs to be done
+4 a proper HTTP code should have a success or error status
+
+4. Understand and explain the use of Express Routers.
+
+Express Routers can be used as a way to cut down on repeating code by creating URL shortcuts. Instead of having to repeat '/api' for every endpoint for example, you could have that in one centralized location and be able to inject that in multiple endpoints via Express Router.
+
+5. Describe tooling used to manually test the correctness of an API.
+
+There are a few ways to manually test API correctness. The two used so far are via HTTPie and Postman, which both of those handle GET POST PUT DELETE (CRUD) requests. HTTPie testing is via terminal, whereas Postman is a standalone software application and webapp which can do the same, with some extra bells and whistles.
